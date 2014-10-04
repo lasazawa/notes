@@ -1,7 +1,9 @@
 
 //Creating click handler for a div.tile
+var any_tile = document.querySelectorAll(".tile");
+var notification = document.querySelector("h4");
+
 var flipTile = function() {
-    var any_tile = document.querySelectorAll(".tile");
     for (var i = any_tile.length - 1; i >= 0; i--) {
         any_tile[i].addEventListener("click", addSelected);
     }
@@ -12,18 +14,17 @@ var winCombos = [["tile1","tile2","tile3"], ["tile4","tile5","tile6"],
                 ["tile2","tile5","tile8"], ["tile3","tile6","tile9"],
                 ["tile1","tile5","tile9"], ["tile3","tile5","tile7"]];
 
-var eachCombo = {};
-var eachToObj = function() {
-    for (var i = winCombos.length - 1; i >= 0; i--) {
-        eachCombo.push(winCombos["combo-number": i]);
-    }
-};
-console.log(eachCombo);
+// // var winCombos = [[0,1,2], [3,4,5], [6,7,8], [0,3,6],
+//                 [1,4,7], [2,5,8], [0,4,8], [2,4,6]];
+// var winCombos = ["tile1", "tile2", "tile3"];
+
 
 var fireClicked = [];
 // var fireClickedSort = fireClicked.sort();
 var tintClicked = [];
 // var tintClickedSort = tintClicked.sort();
+
+
 
 //FLIP TILE ACCORDING TO WHO'S TURN
 var myTurn = true;
@@ -45,52 +46,77 @@ var addSelected = function(event) {
             tintClicked.push(this.getAttribute("id"));
             myTurn = true;
     }
-    //RUN COMPARE
-    var fireWins = function() {
-        fireClicked.sort();
-        if ((fireClicked[0] === winCombos[0]) ||
-            (fireClicked[0] === winCombos[1]) ||
-            (fireClicked[0] === winCombos[2])) {
-            console.log("MATCH 1");
+    console.log(fireClicked);
+    console.log(tintClicked);
+
+    var winFound = function() {
+        // if ((fireClicked.length >= 3)) {
+        var matchCountFire = 0;
+        var matchCountTint = 0;
+        for (var i = winCombos.length - 1; i >= 0; i--) {
+            // for (var j = winCombos[i].length - 1; j >= 0; j--) {
+            //     Things[i]
+            // };
+            for (var f = fireClicked.length - 1; f >= 0; f--) {
+                if (fireClicked[f] === winCombos[i]){
+                    matchCountFire++;
+                    console.log("FIRE count", matchCountFire);
+                }
+            }
+            for (var t = tintClicked.length - 1; t >= 0; t--) {
+                if (tintClicked[t] === winCombos[i]){
+                    matchCountTint++;
+                    console.log("TINT count", matchCountTint);
+                }
+            }
         }
-        else {
-           console.log("NO MATCH");
+        // } if statement makring at least 3
+        if (matchCountFire === 3) {
+            winFound = true;
+            console.log("WIN FOUND!");
+            notification.innerHTML = "Fire wins!!";
+        }
+        if (matchCountTint === 3) {
+            winFound = true;
+            console.log("TINT WINS!!");
+            notification.innerHTML = "Water Wins!!";
         }
     };
-    fireWins();
+    winFound();
 };
 
+    // console.log(any_tile.classList.contains("tint"));
 
-//check if all items in fireClicked match any of the sub-arrays in winCombos[i]
-// var test = function() {
-//     var eachWinCombo = winCombos[i];
-//     for (var a in eachWinCombo) {
-//         if (fireClicked[0] === eachWinCombo[0] ||
-//             fireClicked[1] === eachWinCombo[1] ||
-//             fireClicked[2] === eachWinCombo[2]);
-//     }
-//     if (fireClicked[0] === winCombos[0[0]]);
-//     console.log(fireClicked, winCombos[0]);
-//     test = true;
-// };
+    // RUN COMPARE
+    // var fireWins = function() {
+    //     fireClicked.sort();
+    //     if ((fireClicked[0] === winCombos[0]) ||
+    //         (fireClicked[0] === winCombos[1]) ||
+    //         (fireClicked[0] === winCombos[2])) {
+    //         console.log("MATCH 1");
+    //     }
+    //     else {
+    //        console.log("NO MATCH");
+    //     }
+    // };
+    // fireWins();
 
-// var win = function() {
-//     fireClicked.sort();
-//     if (fireClicked[0] === winCombos[0] {
-//         // fireClickedSort[0] === winCombos[1] ||
-//         // fireClickedSort[0] === winCombos[2] ) {
-//         console.log("YES ITS TRUE");
-//     }
-//     else {
-//         console.log("NO ITS FALSE");
-//     }
-// };
+
+
+// for (var i = 0; i < winCombos.length; i++) {
+//     for (var j = 0; j < winCombos[i].length; j++) {
+//         console.log(winCombos[0]);
+//         }
+//         if (compare.indexOf(winCombos[i][j]) {
+        //     //compare has a number from the current array! main[i][j] exists in compare!
+        // };
+    // }
+
 
 
 
 //RESET BUTTON
 var resetButtonHandler = function() {
-    var any_tile = document.querySelectorAll(".tile");
     for (var i = any_tile.length - 1; i >= 0; i--) {
         any_tile[i].classList.remove("fire", "tint");
     var child = document.querySelectorAll("span");
@@ -100,7 +126,7 @@ var resetButtonHandler = function() {
     }
 };
 
-//initualize function
+//initialize function
 var initialize = function() {
     console.log("Tic Tac Toe is loaded!");
     flipTile();
