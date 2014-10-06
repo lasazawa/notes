@@ -3,7 +3,7 @@
     background-color: rgba(245, 245, 245, 0.95);
     border: solid 2px white;
     display: flex;
-    height:160px;
+    min-height:160px;
 }
 .tile:hover {
     background-color: rgba(0, 0, 0, 0.1);
@@ -19,26 +19,22 @@
 .tint {color: white; background-color: rgba(91, 192, 222, 0.9); text-align: center; display: flex;}
 .fire {color: white; background-color: rgba(217, 83, 79, 0.9); text-align: center; display: flex;}
 .glyphicon-fire, .glyphicon-tint{margin:auto;}
+.tint-turn {color: rgba(91, 192, 222, 1);}
+.fire-turn {color: rgba(217, 83, 79, 1);}
 
 button{margin-top: 20px; float: right;}
 /*REMOVING BORDERS*/
 #row1 .tile {border-top: none;}
 #row3 .tile {border-bottom: none;}
-#row1 .tile:first-child, #row2 .tile:first-child, #row3 .tile:first-child{border-left:none;}
-#row1 .tile:last-child, #row2 .tile:last-child, #row3 .tile:last-child{border-right:none;}
+#tile1, #tile4, #tile7 {border-left:none;}
+#tile3, #tile6, #tile9 {border-right:none;}
 
 .glyphicon {
     font-size: 48px;
     margin:auto;
 }
 
-/*.row-container {
-    margin: 0 auto;
+/*body {
+    background-color: rgba(0, 0, 0, 0.05)
 }
-
-*/
-
-/*DISPLAY TABLE
-CHILDREN DISPLAY TABLE CELL
-FOR GLYPHICONS
 */
