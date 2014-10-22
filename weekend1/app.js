@@ -9,10 +9,8 @@ var flipTile = function() {
     }
 };
 
-var allWinCombos = [["tile1","tile2","tile3"], ["tile4","tile5","tile6"],
-                ["tile7","tile8","tile9"], ["tile1","tile4","tile7"],
-                ["tile2","tile5","tile8"], ["tile3","tile6","tile9"],
-                ["tile1","tile5","tile9"], ["tile3","tile5","tile7"]];
+var allWinCombos = [["tile1","tile2","tile3"], ["tile4","tile5","tile6"], ["tile7","tile8","tile9"], ["tile1","tile4","tile7"],
+                ["tile2","tile5","tile8"], ["tile3","tile6","tile9"], ["tile1","tile5","tile9"], ["tile3","tile5","tile7"]];
 
 var fireClicked = [];
 var tintClicked = [];
@@ -40,9 +38,9 @@ var addSelected = function(event) {
             notification.innerHTML = "Next up: Fire";
             myTurn = true;
     }
-    console.log(fireClicked);
-    console.log(tintClicked);
+    console.log(fireClicked, tintClicked);
 
+    //Detecting whether a win is found
     var winFound = function() {
         var winComboFire = [];
         var winComboTint = [];
@@ -51,6 +49,7 @@ var addSelected = function(event) {
                 for (var f = fireClicked.length - 1; f >= 0; f--) {
                     if (fireClicked[f] === allWinCombos[i][j]) {
                         console.log("Fire clicked: " + fireClicked[f]);
+                        //to make this more efficient push to object {winCombo[i]: count}
                         winComboFire.push(i);
                     }
                     var fireCounter = {};
@@ -65,9 +64,8 @@ var addSelected = function(event) {
                     console.log(fireCounter);
                     for (var x in fireCounter) {
                         if (fireCounter[x] === 3) {
-                            // console.log("FIRE WINSSSS!!!");
                             notification.innerHTML = "Fire beats water!!";
-                            addSelected = false;
+                            break;
                         }
                     }
                 }
@@ -92,9 +90,8 @@ var addSelected = function(event) {
                     console.log(tintCounter);
                     for (var y in tintCounter) {
                         if (tintCounter[y] === 3) {
-                            // console.log("WATER WINSSSS!!!");
                             notification.innerHTML = "Water beats fire!!";
-                            addSelected = false;
+                            break;
                         }
                     }
                 }
